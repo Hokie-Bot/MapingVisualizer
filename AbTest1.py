@@ -33,18 +33,23 @@ fig, ax = ox.plot_graph(graph,show=False,close=False)
 
 me=ax.scatter(lon,lat,c='red')
 plt.draw()
-plt.pause(1)
+plt.pause(0.001)
 for x in range(1,100):
     ser = "$GPGGA,202659.149,3713.789,N,08025.260,W,1,12,1.0,0.0,M,0.0,M,,*71"
     line = ser #add to be readline if needed and add if(starts with $GPGGA) before next 2 lines
     msg = pynmea2.parse(line)
     lat, lon = msg.latitude, msg.longitude
-    me.set_color('blue')
-    plt.draw()
-    plt.pause(5)
     me.set_offsets([lon,lat])
     plt.draw()
-    plt.pause(5)
+    plt.pause(0.5)
+    ser = "$GPGGA,202659.149,3713.668,N,08025.329,W,1,12,1.0,0.0,M,0.0,M,,*73"
+    line = ser
+    msg = pynmea2.parse(line)
+    me.set_color('orange')
+    lat, lon = msg.latitude, msg.longitude
+    me.set_offsets([lon,lat])
+    plt.draw()
+    plt.pause(0.5)
     
 # Set the x and y limits of the map
 
